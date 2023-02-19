@@ -17,7 +17,9 @@ app.use("/api/v1/post", postRoute);
 app.use("/api/v1/dalle", dalleRoute);
 
 app.get("/", async (req, res) => {
-  res.send("Hello from DALL-E");
+  res.status(200).json({
+    message: "Hello from DALL.E",
+  });
 });
 
 const startServer = async () => {
