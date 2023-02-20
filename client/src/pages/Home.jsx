@@ -23,7 +23,7 @@ const Home = () => {
   const fetchPosts = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:8080/api/post", {
+      const response = await fetch("https://dalle-img.onrender.com/api/post", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

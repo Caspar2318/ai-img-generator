@@ -28,13 +28,16 @@ const CreatePost = () => {
     if (form.prompt) {
       try {
         setGeneratingImg(true);
-        const response = await fetch("http://localhost:8080/api/dalle", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ prompt: form.prompt }),
-        });
+        const response = await fetch(
+          "https://dalle-img.onrender.com/api/dalle",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ prompt: form.prompt }),
+          }
+        );
 
         const data = await response.json();
 
@@ -58,13 +61,16 @@ const CreatePost = () => {
 
       try {
         // need to solve internal server error
-        const response = await fetch("http://localhost:8080/api/post", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(form),
-        });
+        const response = await fetch(
+          "https://dalle-img.onrender.com/api/post",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(form),
+          }
+        );
 
         await response.json();
         alert("Success posted!");
