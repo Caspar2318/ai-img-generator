@@ -17,11 +17,13 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [allPosts, setAllPosts] = useState(null);
   const [searchText, setSearchText] = useState("");
+  const [searchedResults, setSearchedResults] = useState(null);
+  const [searchTimeOut, setSearchTimeOut] = useState(null);
 
   const fetchPosts = async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:8080/api/v1/post", {
+      const response = await fetch("http://localhost:8080/api/post", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -44,6 +46,22 @@ const Home = () => {
     fetchPosts();
   }, []);
 
+  const handleSearchChange = (e) => {
+    clearTimeout(searchTimeOut);
+    setSearchText(e.target.value);
+
+    setSearchTimeOut(
+      setTimeout(() => {
+        searchedResults = allPosts.filter(
+          (item) =>
+            item.name.toLowerCase().includes(searchText.toLowerCase()) ||
+            item.prompt.toLowerCase().includes(searchText.toLowerCase())
+        );
+        setSearchedResults(searchedResults);
+      }, 500)
+    );
+  };
+
   return (
     <section className="max-w-7xl mx-auto">
       <div>
@@ -63,7 +81,7 @@ const Home = () => {
           name="text"
           placeholder="Search something..."
           value={searchText}
-          handleChange={() => {}}
+          handleChange={handleSearchChange}
         />
       </div>
 
@@ -82,7 +100,10 @@ const Home = () => {
             )}
             <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap3">
               {searchText ? (
-                <RenderCards data={[]} tilte="No search results found" />
+                <RenderCards
+                  data={searchedResults}
+                  tilte="No search results found"
+                />
               ) : (
                 <RenderCards data={allPosts} title="No posts Yet" />
               )}
