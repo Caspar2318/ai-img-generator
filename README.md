@@ -1,6 +1,6 @@
 # Cutomize to search and generate AI images via interaction with OpenAI DELL-E model
 
-A greate Full-Stack developing practise, deployed via render, mongoDB, Honstinger. Link as:
+A greate Full-Stack developing practise, deployed via render, mongoDB, Honstinger. Link as:https://ai-image-generator.cxcspace.com/
 
 dynamic layout
 --search to generate AI images and share to community
